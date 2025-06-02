@@ -20,7 +20,10 @@ export const blogs = pgTable("Blog", {
   imageUrl: varchar("imageUrl", { length: 512 })
     .notNull()
     .default(defaultImageUrl),
-  tags: text("tags").notNull().$type<string[]>(),
+  tags: text("tags")
+    .array()
+    .notNull()
+    .default(sql`ARRAY[]::text[]`),
   readingTime: integer("readingTime").notNull(),
   readingTimeUnit: varchar("readingTimeUnit", { length: 50 }).notNull(),
   createdAt: timestamp("createdAt").notNull().defaultNow(),
