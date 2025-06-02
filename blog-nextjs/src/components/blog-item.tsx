@@ -1,3 +1,4 @@
+import { formatReadingTime } from "@/lib/utils";
 import { Blog } from "../generated/prisma/client";
 import {
   Card,
@@ -9,10 +10,6 @@ import {
 import { Separator } from "./ui/separator";
 import { ClockIcon, UserIcon } from "lucide-react";
 import Image from "next/image";
-
-const formatReadingTime = (time: number, unit: string) => {
-  return `${time} ${unit}`;
-};
 
 export function BlogItem({ blog }: { blog: Blog }) {
   return (
