@@ -14,20 +14,26 @@ import { Badge } from "@/components/ui/badge";
 
 export function BlogItem({ blog }: { blog: Blog }) {
   return (
-    <Card className="pt-0 overflow-hidden  gap-3 h-full">
-      <Image
-        src={blog.imageUrl}
-        alt={blog.title}
-        width={300}
-        height={200}
-        className="w-full h-50 object-cover"
-      />
+    <Card className="pt-0 overflow-hidden gap-3 group h-full">
+      <div className="overflow-hidden">
+        <Image
+          src={blog.imageUrl}
+          alt={blog.title}
+          width={300}
+          height={200}
+          className="w-full h-50 object-cover transition-transform duration-500 group-hover:scale-110"
+        />
+      </div>
       <CardHeader>
-        <CardTitle className="text-lg">{blog.title}</CardTitle>
+        <CardTitle className="text-lg transition-colors duration-300 group-hover:text-primary">
+          {blog.title}
+        </CardTitle>
       </CardHeader>
 
-      <CardContent>
-        <p className="text-sm text-muted-foreground">{blog.description}</p>
+      <CardContent className="flex flex-col justify-between h-30">
+        <p className="text-sm text-muted-foreground transition-colors duration-300 group-hover:text-foreground line-clamp-4">
+          {blog.description}
+        </p>
         <div className="flex items-center gap-4 text-sm mt-4">
           <div className="flex items-center gap-2">
             <UserIcon className="size-4" />
@@ -45,7 +51,9 @@ export function BlogItem({ blog }: { blog: Blog }) {
       <Separator />
       <CardFooter className="flex items-center gap-2 flex-wrap">
         {blog.tags.map((tag) => (
-          <Badge key={tag}>{tag}</Badge>
+          <Badge key={tag} variant="secondary">
+            {tag}
+          </Badge>
         ))}
       </CardFooter>
     </Card>
