@@ -54,7 +54,7 @@ export function MainNav() {
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild className="md:hidden">
             <Button variant="ghost" size="icon">
-              <Menu className="size-6" />
+              <Menu className="size-6 text-primary" />
               <span className="sr-only">Menu öffnen</span>
             </Button>
           </SheetTrigger>

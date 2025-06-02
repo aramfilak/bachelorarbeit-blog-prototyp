@@ -1,5 +1,5 @@
+import { type Blog } from "@/db/schema";
 import { formatReadingTime } from "@/lib/utils";
-import { Blog } from "../generated/prisma/client";
 import {
   Card,
   CardContent,
@@ -13,7 +13,7 @@ import Image from "next/image";
 
 export function BlogItem({ blog }: { blog: Blog }) {
   return (
-    <Card className="pt-0 overflow-hidden">
+    <Card className="pt-0 overflow-hidden hover:shadow-xl transition-all duration-400 hover:scale-102">
       <Image
         src={blog.imageUrl}
         alt={blog.title}

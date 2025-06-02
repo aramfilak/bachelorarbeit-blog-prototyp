@@ -15,7 +15,7 @@ export function BlogMetadata({
   createdAt,
 }: BlogMetadataProps) {
   return (
-    <div className="flex items-center gap-6 text-sm">
+    <div className="flex items-center gap-6 text-sm mt-4">
       <div className="flex items-center gap-2 text-muted-foreground">
         <UserIcon className="size-5" />
         <span className="font-medium">{author}</span>
