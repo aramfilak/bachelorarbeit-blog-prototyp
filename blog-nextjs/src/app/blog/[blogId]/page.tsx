@@ -1,9 +1,9 @@
 import { Separator } from "@/components/ui/separator";
 import { prisma } from "@/lib/prisma";
-import { BlogHeader } from "@/components/blog/BlogHeader";
-import { BlogMetadata } from "@/components/blog/BlogMetadata";
-import { BlogImage } from "@/components/blog/BlogImage";
-import { BlogContent } from "@/components/blog/BlogContent";
+import { BlogHeader } from "@/components/blog/blog-header";
+import { BlogMetadata } from "@/components/blog/blog-metadata";
+import { BlogImage } from "@/components/blog/blog-image";
+import { BlogContent } from "@/components/blog/blog-content";
 
 export default async function BlogDetail({
   params,
