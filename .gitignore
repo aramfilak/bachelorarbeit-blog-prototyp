@@ -53,3 +53,8 @@ lerna-debug.log*
 .DS_Store
 *.pem
 *.local
+
+
+ # prisma
+
+blog-nextjs/prisma/migrations/
