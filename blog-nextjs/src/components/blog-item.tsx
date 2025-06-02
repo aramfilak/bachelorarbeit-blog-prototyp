@@ -8,15 +8,23 @@ import {
 } from "./ui/card";
 import { Separator } from "./ui/separator";
 import { ClockIcon, UserIcon } from "lucide-react";
+import Image from "next/image";
 
 const formatReadingTime = (time: number, unit: string) => {
   return `${time} ${unit}`;
 };
 
-export default async function BlogItem({ blog }: { blog: Blog }) {
+export function BlogItem({ blog }: { blog: Blog }) {
   return (
-    <Card>
-      <CardHeader className="space-y-1">
+    <Card className="pt-0 overflow-hidden">
+      <Image
+        src={blog.imageUrl}
+        alt={blog.title}
+        width={300}
+        height={200}
+        className="w-full h-50 object-cover"
+      />
+      <CardHeader>
         <CardTitle className="text-lg">{blog.title}</CardTitle>
       </CardHeader>
 

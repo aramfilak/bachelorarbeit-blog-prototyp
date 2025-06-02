@@ -1,5 +1,6 @@
-import BlogItem from "@/components/blog-item";
+import { BlogItem } from "@/components/blog-item";
 import { prisma } from "@/lib/prisma";
+import Link from "next/link";
 
 export default async function Home() {
   const blogs = await prisma.blog.findMany();
@@ -7,9 +8,11 @@ export default async function Home() {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-2xl font-bold mb-4">Aktuelle Beiträge</h1>
-      <div className="space-y-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {blogs.map((blog) => (
-          <BlogItem key={blog.id} blog={blog} />
+          <Link href={`/blog/${blog.id}`} key={blog.id}>
+            <BlogItem blog={blog} />
+          </Link>
         ))}
       </div>
     </div>
