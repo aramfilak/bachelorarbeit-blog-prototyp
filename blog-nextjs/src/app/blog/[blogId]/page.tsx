@@ -10,6 +10,7 @@ import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { eq } from "drizzle-orm";
 import { notFound } from "next/navigation";
+import { BlogActions } from "@/components/blog/blog-actions";
 
 export async function generateStaticParams() {
   const allBlogs = await db.select({ id: blogs.id }).from(blogs);
@@ -37,11 +38,14 @@ export default async function BlogDetail({
   return (
     <main className="min-h-screen bg-background py-12">
       <div className="container mx-auto px-4 max-w-5xl">
-        <Button asChild variant="ghost" className="mb-4">
-          <Link href="/">
-            <ArrowLeft /> Zurück
-          </Link>
-        </Button>
+        <div className="flex items-center justify-between">
+          <Button asChild variant="ghost" className="mb-4">
+            <Link href="/">
+              <ArrowLeft /> Zurück
+            </Link>
+          </Button>
+          <BlogActions />
+        </div>
 
         <BlogHeader title={blog.title} description={blog.description} />
         <Separator className="my-4" />

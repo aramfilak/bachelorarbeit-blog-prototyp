@@ -49,7 +49,7 @@ export function BlogActions() {
   return (
     <>
       {/* Desktop */}
-      <div className="hidden md:block">
+      <div className="hidden md:flex gap-2">
         <Tooltip>
           <TooltipTrigger asChild>
             <Button variant="ghost">
@@ -60,11 +60,13 @@ export function BlogActions() {
         </Tooltip>
         <Tooltip>
           <TooltipTrigger asChild>
-            <DeleteButton>
-              <Button variant="ghost">
-                <Trash2 className="size-4" />
-              </Button>
-            </DeleteButton>
+            <div>
+              <DeleteButton>
+                <Button variant="ghost">
+                  <Trash2 className="size-4" />
+                </Button>
+              </DeleteButton>
+            </div>
           </TooltipTrigger>
           <TooltipContent>Löschen</TooltipContent>
         </Tooltip>
