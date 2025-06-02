@@ -1,6 +1,5 @@
 import { sql } from "drizzle-orm";
 import {
-  boolean,
   pgTable,
   text,
   timestamp,
@@ -24,7 +23,6 @@ export const blogs = pgTable("Blog", {
   tags: text("tags").notNull().$type<string[]>(),
   readingTime: integer("readingTime").notNull(),
   readingTimeUnit: varchar("readingTimeUnit", { length: 50 }).notNull(),
-  published: boolean("published").notNull().default(false),
   createdAt: timestamp("createdAt").notNull().defaultNow(),
   updatedAt: timestamp("updatedAt")
     .notNull()

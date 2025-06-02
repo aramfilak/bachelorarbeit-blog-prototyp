@@ -1,0 +1,1 @@
+ALTER TABLE "Blog" DROP COLUMN "published";

@@ -12,8 +12,8 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ModeToggle } from "@/components/ui/mode-toggle";
 
 const navItems = [
-  { name: "Blogs", href: "/" }, // Blogs
-  { name: "Neuer Blog", href: "/create-blog" }, // New Blog → Neuer Blog
+  { name: "Blogs", href: "/" },
+  { name: "Neuer Blog", href: "/blog/new" },
 ];
 
 export function MainNav() {

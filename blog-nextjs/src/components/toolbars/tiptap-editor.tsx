@@ -53,7 +53,7 @@ const extensions = [
   }),
 ];
 
-export default function TiptapEditor({
+export function TiptapEditor({
   content,
   onChange,
 }: {
@@ -97,7 +97,7 @@ export default function TiptapEditor({
         onClick={() => {
           editor?.chain().focus().run();
         }}
-        className="cursor-text min-h-[18rem] bg-background"
+        className="cursor-text min-h-[18rem] max-h-[50vh] bg-background resize-y overflow-auto"
       >
         <EditorContent className="outline-none" editor={editor} />
       </div>

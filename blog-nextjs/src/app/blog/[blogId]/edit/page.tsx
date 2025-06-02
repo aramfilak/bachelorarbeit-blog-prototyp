@@ -1,6 +1,6 @@
 "use client";
 
-import TiptapEditor from "@/components/toolbars/tiptap-editor";
+import { TiptapEditor } from "@/components/toolbars/tiptap-editor";
 import { useState } from "react";
 
 export default function BlogEdit() {
