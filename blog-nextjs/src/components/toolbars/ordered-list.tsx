@@ -30,7 +30,7 @@ const OrderedListToolbar = React.forwardRef<HTMLButtonElement, ButtonProps>(
               editor?.chain().focus().toggleOrderedList().run();
               onClick?.(e);
             }}
-            disabled={!editor?.can().chain().focus().toggleOrderedList().run()}
+            //  disabled={!editor?.can().chain().focus().toggleOrderedList().run()}
             ref={ref}
             {...props}
           >

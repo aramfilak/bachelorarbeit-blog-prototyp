@@ -31,7 +31,7 @@ const BulletListToolbar = React.forwardRef<HTMLButtonElement, ButtonProps>(
               editor?.chain().focus().toggleBulletList().run();
               onClick?.(e);
             }}
-            disabled={!editor?.can().chain().focus().toggleBulletList().run()}
+            //   disabled={!editor?.can().chain().focus().toggleBulletList().run()}
             ref={ref}
             {...props}
           >
