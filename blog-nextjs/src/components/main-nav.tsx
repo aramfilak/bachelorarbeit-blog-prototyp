@@ -23,8 +23,8 @@ export function MainNav() {
   return (
     <div className="flex items-center justify-between w-full py-4 px-4">
       <div className="flex items-center gap-6">
-        <Link href="/" className="font-bold text-xl mr-10">
-          <NotebookPen className="size-6" />
+        <Link href="/">
+          <NotebookPen className="size-7" />
         </Link>
 
         {/* Desktop Navigation */}
@@ -34,10 +34,12 @@ export function MainNav() {
               key={item.href}
               href={item.href}
               className={cn(
-                "font-medium transition-colors hover:text-primary",
-                pathname === item.href
-                  ? "text-primary font-semibold"
-                  : "text-muted-foreground"
+                "font-medium transition-colors hover:text-primary relative",
+                "after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 after:bg-primary after:transition-transform after:duration-300 hover:after:scale-x-100",
+                {
+                  "text-primary after:scale-x-100": pathname === item.href,
+                  "text-muted-foreground": pathname !== item.href,
+                }
               )}
             >
               {item.name}
@@ -67,10 +69,12 @@ export function MainNav() {
                   href={item.href}
                   onClick={() => setIsOpen(false)}
                   className={cn(
-                    "text-sm font-medium transition-colors hover:text-primary p-2 rounded-md",
-                    pathname === item.href
-                      ? "text-primary font-semibold bg-muted"
-                      : "text-muted-foreground"
+                    "text-sm font-medium transition-colors hover:text-primary p-2 rounded-md relative",
+                    "after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 after:bg-primary after:transition-transform after:duration-300 hover:after:scale-x-100",
+                    {
+                      "text-primary after:scale-x-100": pathname === item.href,
+                      "text-muted-foreground": pathname !== item.href,
+                    }
                   )}
                 >
                   {item.name}
