@@ -110,6 +110,8 @@ export async function updateBlog(
       .where(eq(blogs.id, id));
 
     revalidatePath(`/blog/${id}`);
+    revalidatePath("/blog");
+    revalidatePath(`/blog/${id}/edit`);
     return {
       success: true,
       message: "Blog erfolgreich aktualisiert",
