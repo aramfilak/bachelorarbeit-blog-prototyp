@@ -1,5 +1,6 @@
 import {
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -29,6 +30,9 @@ export function ReadingTimeFields() {
             <FormControl>
               <Input type="number" min={1} {...field} />
             </FormControl>
+            <FormDescription>
+              Die Lesezeit des Blogbeitrags in Minuten oder Stunden.
+            </FormDescription>
             <FormMessage />
           </FormItem>
         )}
@@ -51,6 +55,9 @@ export function ReadingTimeFields() {
                 </SelectContent>
               </Select>
             </FormControl>
+            <FormDescription>
+              Zeitangabe für die Lesezeit des Blogbeitrags.
+            </FormDescription>
             <FormMessage />
           </FormItem>
         )}

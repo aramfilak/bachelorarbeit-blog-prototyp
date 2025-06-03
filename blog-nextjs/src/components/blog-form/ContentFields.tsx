@@ -1,6 +1,7 @@
 import { TiptapEditor } from "@/components/toolbars/tiptap-editor";
 import {
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -26,6 +27,9 @@ export function ContentFields() {
                 {...field}
               />
             </FormControl>
+            <FormDescription>
+              Eine interessante Beschreibung, die die Lesenden motiviert.
+            </FormDescription>
             <FormMessage />
           </FormItem>
         )}
@@ -43,6 +47,7 @@ export function ContentFields() {
                 content={field.value as string}
               />
             </FormControl>
+            <FormDescription>Der Inhalt des Blogbeitrags.</FormDescription>
             <FormMessage />
           </FormItem>
         )}

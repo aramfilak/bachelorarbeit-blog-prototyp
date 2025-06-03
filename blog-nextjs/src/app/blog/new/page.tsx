@@ -8,14 +8,19 @@ import { AuthorTitleFields } from "@/components/blog-form/AuthorTitleFields";
 import { ContentFields } from "@/components/blog-form/ContentFields";
 import { MediaFields } from "@/components/blog-form/MediaFields";
 import { ReadingTimeFields } from "@/components/blog-form/ReadingTimeFields";
+import { useRouter } from "next/navigation";
 import {
   blogFormSchema,
   type BlogFormValues,
 } from "@/components/blog-form/schema";
+import { createBlog } from "@/app/server/actions";
+import { toast } from "sonner";
 
 export default function NewBlog() {
+  const router = useRouter();
   const form = useForm<BlogFormValues>({
     resolver: zodResolver(blogFormSchema),
+    mode: "onSubmit",
     defaultValues: {
       author: "",
       title: "",
@@ -29,14 +34,18 @@ export default function NewBlog() {
   });
 
   async function onSubmit(data: BlogFormValues) {
-    console.log(data);
-    // TODO: Implement the API call to save the blog
+    const result = await createBlog(null, data);
+    if (result?.success && result.data) {
+      router.push(`/blog/${result.data.id}`);
+      toast.success(result.message);
+    } else {
+      toast.error(result?.message);
+    }
   }
 
   return (
     <div className="container mx-auto py-10 px-4 max-w-5xl">
       <h1 className="text-3xl font-bold mb-8">Neuen Blogbeitrag erstellen</h1>
-
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <AuthorTitleFields />
@@ -44,8 +53,15 @@ export default function NewBlog() {
           <ReadingTimeFields />
           <ContentFields />
 
-          <Button type="submit" className="w-full">
-            Veröffentlichen
+          <Button
+            type="submit"
+            size="lg"
+            className="w-full"
+            disabled={form.formState.isSubmitting}
+          >
+            {form.formState.isSubmitting
+              ? "Veröffentlichen..."
+              : "Veröffentlichen"}
           </Button>
         </form>
       </Form>

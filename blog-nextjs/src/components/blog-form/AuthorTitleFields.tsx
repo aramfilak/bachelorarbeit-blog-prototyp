@@ -1,5 +1,6 @@
 import {
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -22,6 +23,7 @@ export function AuthorTitleFields() {
             <FormControl>
               <Input placeholder="Ihr Name" {...field} />
             </FormControl>
+            <FormDescription>Autor des Blogbeitrags.</FormDescription>
             <FormMessage />
           </FormItem>
         )}
@@ -36,6 +38,7 @@ export function AuthorTitleFields() {
             <FormControl>
               <Input placeholder="Blog-Titel" {...field} />
             </FormControl>
+            <FormDescription>Interessante Artikelüberschrift </FormDescription>
             <FormMessage />
           </FormItem>
         )}

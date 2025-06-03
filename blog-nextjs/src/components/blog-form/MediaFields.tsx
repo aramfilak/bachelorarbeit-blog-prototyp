@@ -25,7 +25,8 @@ export function MediaFields() {
               <Input placeholder="https://beispiel.de/bild.jpg" {...field} />
             </FormControl>
             <FormDescription>
-              Leer lassen, um das Standardbild zu verwenden
+              Verwenden Sie eine Bild-URL, um ein Bild für den Blogbeitrag zu
+              verwenden. (Optional)
             </FormDescription>
             <FormMessage />
           </FormItem>

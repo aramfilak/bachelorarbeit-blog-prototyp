@@ -24,8 +24,26 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { deleteBlog } from "@/app/server/actions";
+import { redirect } from "next/navigation";
+import { toast } from "sonner";
 
-const DeleteButton = ({ children }: { children: React.ReactNode }) => {
+type DeleteButtonProps = {
+  children: React.ReactNode;
+  blogId: number;
+};
+
+const DeleteButton = ({ children, blogId }: DeleteButtonProps) => {
+  const handleDelete = async () => {
+    const result = await deleteBlog(blogId);
+    if (result?.success) {
+      toast.success(result.message);
+      redirect("/");
+    } else {
+      toast.error(result?.message);
+    }
+  };
+
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
@@ -38,14 +56,16 @@ const DeleteButton = ({ children }: { children: React.ReactNode }) => {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Abbrechen</AlertDialogCancel>
-          <AlertDialogAction>Ja, löschen</AlertDialogAction>
+          <AlertDialogAction onClick={handleDelete}>
+            Ja, löschen
+          </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
   );
 };
 
-export function BlogActions() {
+export function BlogActions({ blogId }: { blogId: number }) {
   return (
     <>
       {/* Desktop */}
@@ -61,7 +81,7 @@ export function BlogActions() {
         <Tooltip>
           <TooltipTrigger asChild>
             <div>
-              <DeleteButton>
+              <DeleteButton blogId={blogId}>
                 <Button variant="ghost">
                   <Trash2 className="size-4" />
                 </Button>
@@ -84,7 +104,7 @@ export function BlogActions() {
             <Pencil className="size-4" />
             Bearbeiten
           </DropdownMenuItem>
-          <DeleteButton>
+          <DeleteButton blogId={blogId}>
             <DropdownMenuItem
               className="hover:text-destructive"
               onSelect={(e) => e.preventDefault()}

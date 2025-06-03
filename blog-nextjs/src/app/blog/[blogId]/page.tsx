@@ -7,7 +7,10 @@ import { BlogImage } from "@/components/blog/blog-image";
 import { BlogContent } from "@/components/blog/blog-content";
 import { eq } from "drizzle-orm";
 import { notFound } from "next/navigation";
-import { BlogToolbar } from "@/components/blog/blog-toolbar";
+import { BlogActions } from "@/components/blog/blog-actions";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 
 export async function generateStaticParams() {
   const allBlogs = await db.select({ id: blogs.id }).from(blogs);
@@ -35,7 +38,14 @@ export default async function BlogDetail({
   return (
     <main className="min-h-screen bg-background py-12">
       <div className="container mx-auto px-4 max-w-5xl">
-        <BlogToolbar />
+        <div className="flex items-center justify-between mb-4">
+          <Button asChild variant="ghost">
+            <Link href="/">
+              <ArrowLeft /> Zurück
+            </Link>
+          </Button>
+          <BlogActions blogId={parseInt(blogId)} />
+        </div>
         <BlogHeader title={blog.title} description={blog.description} />
         <Separator className="my-4" />
         <BlogMetadata
