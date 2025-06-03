@@ -3,6 +3,8 @@ import { db } from "@/db";
 import { blogs } from "@/db/schema";
 import Link from "next/link";
 
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
   const allBlogs = await db.select().from(blogs);
 
