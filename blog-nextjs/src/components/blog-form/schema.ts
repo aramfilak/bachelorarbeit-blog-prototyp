@@ -14,9 +14,12 @@ export const blogFormSchema = z.object({
     message: "Der Inhalt muss mindestens 50 Zeichen lang sein.",
   }),
   imageUrl: z.string().url().or(z.literal("")),
-  tags: z.array(z.string()).max(5, {
-    message: "Es können maximal 5 Schlagwörter hinzugefügt werden.",
-  }),
+  tags: z
+    .array(z.string())
+    .max(5, {
+      message: "Es können maximal 5 Schlagwörter hinzugefügt werden.",
+    })
+    .default([]),
   readingTime: z.coerce.number().min(1),
   readingTimeUnit: z.enum(["minutes", "hours"]),
 });

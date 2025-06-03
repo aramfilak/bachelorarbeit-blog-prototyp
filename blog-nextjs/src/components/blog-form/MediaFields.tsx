@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { TagInput } from "@/components/ui/tag-input";
+import Image from "next/image";
 import { useFormContext } from "react-hook-form";
 
 export function MediaFields() {
@@ -20,6 +21,19 @@ export function MediaFields() {
         name="imageUrl"
         render={({ field }) => (
           <FormItem>
+            {field.value && (
+              // preview image
+              <div className="rounded-lg overflow-hidden shadow-md border">
+                <Image
+                  src={field.value}
+                  alt="Bild"
+                  className="w-full h-[200px] object-cover hover:scale-105 transition-transform duration-300"
+                  width={300}
+                  height={200}
+                  priority
+                />
+              </div>
+            )}
             <FormLabel>Bild-URL</FormLabel>
             <FormControl>
               <Input placeholder="https://beispiel.de/bild.jpg" {...field} />

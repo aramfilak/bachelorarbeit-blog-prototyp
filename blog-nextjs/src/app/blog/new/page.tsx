@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { Resolver, useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { AuthorTitleFields } from "@/components/blog-form/AuthorTitleFields";
@@ -19,7 +19,7 @@ import { toast } from "sonner";
 export default function NewBlog() {
   const router = useRouter();
   const form = useForm<BlogFormValues>({
-    resolver: zodResolver(blogFormSchema),
+    resolver: zodResolver(blogFormSchema) as Resolver<BlogFormValues>,
     mode: "onSubmit",
     defaultValues: {
       author: "",
@@ -34,7 +34,7 @@ export default function NewBlog() {
   });
 
   async function onSubmit(data: BlogFormValues) {
-    const result = await createBlog(null, data);
+    const result = await createBlog(data);
     if (result?.success && result.data) {
       router.push(`/blog/${result.data.id}`);
       toast.success(result.message);

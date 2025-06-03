@@ -25,6 +25,11 @@ export default async function BlogDetail({
   params: Promise<{ blogId: string }>;
 }) {
   const { blogId } = await params;
+  const blogIdNumber = Number(blogId);
+  if (isNaN(blogIdNumber)) {
+    notFound();
+  }
+
   const [blog] = await db
     .select()
     .from(blogs)

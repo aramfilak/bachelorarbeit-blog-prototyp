@@ -66,13 +66,17 @@ const DeleteButton = ({ children, blogId }: DeleteButtonProps) => {
 };
 
 export function BlogActions({ blogId }: { blogId: number }) {
+  const handleEdit = () => {
+    redirect(`/blog/${blogId}/edit`);
+  };
+
   return (
     <>
       {/* Desktop */}
       <div className="hidden md:flex gap-2">
         <Tooltip>
           <TooltipTrigger asChild>
-            <Button variant="ghost">
+            <Button variant="ghost" onClick={handleEdit}>
               <Pencil className="size-4" />
             </Button>
           </TooltipTrigger>
@@ -100,7 +104,7 @@ export function BlogActions({ blogId }: { blogId: number }) {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-44 md:hidden">
-          <DropdownMenuItem>
+          <DropdownMenuItem onClick={handleEdit}>
             <Pencil className="size-4" />
             Bearbeiten
           </DropdownMenuItem>

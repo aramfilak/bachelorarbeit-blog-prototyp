@@ -45,7 +45,7 @@ export function ReadingTimeFields() {
           <FormItem className="flex-1">
             <FormLabel>Zeiteinheit</FormLabel>
             <FormControl>
-              <Select onValueChange={field.onChange} value={field.value}>
+              <Select onValueChange={field.onChange} {...field}>
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Zeiteinheit" />
                 </SelectTrigger>
