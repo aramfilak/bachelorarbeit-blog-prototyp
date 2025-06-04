@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
+import type { BlogResponse } from "@/types/blog";
 
 type DeleteButtonProps = {
   children: React.ReactNode;
@@ -34,7 +35,25 @@ type DeleteButtonProps = {
 
 const DeleteButton = ({ children, blogId }: DeleteButtonProps) => {
   const navigate = useNavigate();
-  const handleDelete = async () => {};
+  const handleDelete = async () => {
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_BASE_URL}/blog/${blogId}`,
+        {
+          method: "DELETE",
+        }
+      );
+      const { message, success, error } = (await res.json()) as BlogResponse;
+      if (success) {
+        toast.success(message);
+        navigate("/");
+      } else {
+        toast.error(message, { description: error });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <AlertDialog>
