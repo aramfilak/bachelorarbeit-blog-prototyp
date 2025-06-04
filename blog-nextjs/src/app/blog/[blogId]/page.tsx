@@ -11,6 +11,51 @@ import { BlogActions } from "@/components/blog/blog-actions";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { Metadata } from "next";
+
+const notFoundMetadata = {
+  title: "Blogbeitrag nicht gefunden",
+  description: "Der angeforderte Blogbeitrag konnte nicht gefunden werden.",
+};
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ blogId: string }>;
+}): Promise<Metadata> {
+  const { blogId } = await params;
+  const blogIdNumber = Number(blogId);
+
+  if (isNaN(blogIdNumber)) {
+    return notFoundMetadata;
+  }
+
+  const [blog] = await db
+    .select()
+    .from(blogs)
+    .where(eq(blogs.id, parseInt(blogId)))
+    .limit(1);
+
+  if (!blog) {
+    return notFoundMetadata;
+  }
+
+  return {
+    title: blog.title,
+    description: blog.description,
+    openGraph: {
+      title: blog.title,
+      description: blog.description,
+      images: [{ url: blog.imageUrl }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: blog.title,
+      description: blog.description,
+      images: [blog.imageUrl],
+    },
+  };
+}
 
 export async function generateStaticParams() {
   const allBlogs = await db.select({ id: blogs.id }).from(blogs);
