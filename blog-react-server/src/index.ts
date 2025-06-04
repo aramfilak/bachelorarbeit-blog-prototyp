@@ -34,13 +34,19 @@ type BlogResponse = {
 /**
  * @Description Middleware to validate blog data
  */
-const validateBlog = (req: Request, res: Response, next: NextFunction) => {
+const validateBlog: RequestHandler = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const result = blogFormSchema.safeParse(req.body);
   if (!result.success) {
     res.status(400).json({
-      message: "Invalid blog data",
-      errors: result.error.flatten().fieldErrors,
+      success: false,
+      message: "Ungültige Blog-Daten",
+      error: result.error.flatten().fieldErrors,
     });
+    return;
   }
   next();
 };

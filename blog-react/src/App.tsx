@@ -5,6 +5,7 @@ import { MainNav } from "./components/main-nav.tsx";
 import { Toaster } from "sonner";
 import NotFound from "./components/not-found.tsx";
 import Blog from "./pages/blog.tsx";
+import NewBlog from "./pages/new-blog.tsx";
 
 export default function App() {
   return (
@@ -14,7 +15,12 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/blog/:blogId" element={<Blog />} />
-        <Route path="/not-found" element={<NotFound />} />
+        {/* Blog routes */}
+        <Route path="/blog">
+          <Route path="new" element={<NewBlog />} />
+          <Route path=":blogId" element={<Blog />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </ThemeProvider>
