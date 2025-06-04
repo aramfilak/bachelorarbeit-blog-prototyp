@@ -22,6 +22,13 @@
       "when": 1748901011026,
       "tag": "0002_giant_ben_parker",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1749052874539,
+      "tag": "0003_stormy_lockheed",
+      "breakpoints": true
     }
   ]
 }

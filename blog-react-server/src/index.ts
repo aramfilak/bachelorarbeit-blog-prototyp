@@ -2,6 +2,8 @@ import express from "express";
 import morgan from "morgan";
 import cors from "cors";
 import dotenv from "dotenv";
+import { connectToDatabase } from "./db/index.js";
+import { Blog } from "./db/index.js";
 
 dotenv.config();
 
@@ -16,6 +18,12 @@ app.use(
 app.use(morgan("dev"));
 app.use(express.json());
 
+app.use("/", async (req, res) => {
+  const allBlogs = await Blog.find({});
+  console.log(allBlogs);
+  res.json({ allBlogs });
+});
+
 /*
  * RUN SERVER
  */
@@ -24,6 +32,7 @@ app.use(express.json());
   const serverLocal = `http://localhost:${port}`;
 
   try {
+    await connectToDatabase();
     console.info("  ➜  Connected to database ✅");
 
     app.listen(port, () => {
