@@ -1,4 +1,3 @@
-import { db } from "@/db/migrate";
 import { blogs } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { notFound } from "next/navigation";
@@ -6,6 +5,7 @@ import { EditBlogForm } from "./edit-blog-form";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { db } from "@/db";
 
 export default async function BlogEdit({
   params,
