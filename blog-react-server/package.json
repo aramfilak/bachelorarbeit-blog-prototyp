@@ -14,8 +14,10 @@
   "description": "",
   "dependencies": {
     "cors": "^2.8.5",
-    "mongoose": "^8.15.1",
-    "morgan": "^1.10.0"
+    "drizzle-orm": "^0.44.2",
+    "morgan": "^1.10.0",
+    "pg": "^8.16.0",
+    "zod": "^3.25.51"
   },
   "devDependencies": {
     "@tsconfig/node22": "^22.0.2",
@@ -23,7 +25,9 @@
     "@types/express": "^5.0.2",
     "@types/morgan": "^1.9.9",
     "@types/node": "^22.15.29",
+    "@types/pg": "^8.15.4",
     "dotenv": "^16.5.0",
+    "drizzle-kit": "^0.31.1",
     "eslint": "^9.28.0",
     "express": "^5.1.0",
     "nodemon": "^3.1.10",
