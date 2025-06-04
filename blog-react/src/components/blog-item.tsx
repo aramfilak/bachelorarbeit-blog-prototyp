@@ -1,5 +1,3 @@
-import { type Blog } from "@/db/schema";
-import { formatReadingTime } from "@/lib/utils";
 import {
   Card,
   CardContent,
@@ -9,14 +7,15 @@ import {
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { ClockIcon, UserIcon } from "lucide-react";
-import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
+import type { Blog } from "@/types/blog";
+import { formatReadingTime } from "@/lib/utils";
 
 export function BlogItem({ blog }: { blog: Blog }) {
   return (
     <Card className="pt-0 overflow-hidden gap-3 group h-full">
       <div className="overflow-hidden">
-        <Image
+        <img
           src={blog.imageUrl}
           alt={blog.title}
           width={300}

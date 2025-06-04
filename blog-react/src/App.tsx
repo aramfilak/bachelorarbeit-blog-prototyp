@@ -9,7 +9,7 @@ export default function App() {
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <MainNav />
       <Routes>
-        <Route path="home" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="blog" element={<Blog />} />
       </Routes>
     </ThemeProvider>
