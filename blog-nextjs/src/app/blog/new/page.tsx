@@ -15,6 +15,8 @@ import {
 } from "@/components/blog-form/schema";
 import { createBlog } from "@/app/server/actions";
 import { toast } from "sonner";
+import Link from "next/link";
+import { ArrowLeftIcon } from "lucide-react";
 
 export default function NewBlog() {
   const router = useRouter();
@@ -45,6 +47,11 @@ export default function NewBlog() {
 
   return (
     <div className="container mx-auto py-10 px-4 max-w-5xl">
+      <Button asChild variant="ghost" className="mb-4">
+        <Link href="/">
+          <ArrowLeftIcon className="size-4" /> Zurück
+        </Link>
+      </Button>
       <h1 className="text-3xl font-bold mb-8">Neuen Blogbeitrag erstellen</h1>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">

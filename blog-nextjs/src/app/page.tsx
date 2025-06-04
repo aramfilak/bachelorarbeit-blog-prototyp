@@ -2,6 +2,7 @@ import { BlogItem } from "@/components/blog-item";
 import { db } from "@/db";
 import { blogs } from "@/db/schema";
 import Link from "next/link";
+import { NewBlogBtn } from "@/components/new-blog-btn";
 
 export const dynamic = "force-dynamic";
 
@@ -17,6 +18,7 @@ export default async function Home() {
             <BlogItem blog={blog} />
           </Link>
         ))}
+        <NewBlogBtn />
       </div>
     </div>
   );
