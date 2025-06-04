@@ -64,8 +64,6 @@ export async function createBlog(
 
     const [blog] = await db.insert(blogs).values(formData).returning();
 
-    revalidatePath("/blog");
-
     return {
       success: true,
       message: "Blog erfolgreich erstellt",
@@ -95,7 +93,7 @@ type DeleteBlogResponse =
 export async function deleteBlog(id: number): Promise<DeleteBlogResponse> {
   try {
     await db.delete(blogs).where(eq(blogs.id, id));
-    revalidatePath("/blog");
+
     return {
       success: true,
       message: "Blog erfolgreich gelöscht",
