@@ -152,7 +152,6 @@ export async function updateBlog(
 
     revalidatePath(`/blog/${id}`);
     revalidatePath("/blog");
-    revalidatePath(`/blog/${id}/edit`);
     return {
       success: true,
       message: "Blog erfolgreich aktualisiert",
