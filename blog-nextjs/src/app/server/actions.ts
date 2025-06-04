@@ -151,7 +151,6 @@ export async function updateBlog(
       .where(eq(blogs.id, id));
 
     revalidatePath(`/blog/${id}`);
-    revalidatePath("/blog");
     return {
       success: true,
       message: "Blog erfolgreich aktualisiert",
