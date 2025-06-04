@@ -3,11 +3,13 @@ import Home from "./pages/home.tsx";
 import Blog from "./pages/blog.tsx";
 import { ThemeProvider } from "./components/theme-provider.tsx";
 import { MainNav } from "./components/main-nav.tsx";
+import { Toaster } from "sonner";
 
 export default function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <MainNav />
+      <Toaster richColors position="top-center" />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="blog" element={<Blog />} />

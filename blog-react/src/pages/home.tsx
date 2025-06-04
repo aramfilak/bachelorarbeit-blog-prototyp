@@ -1,33 +1,40 @@
 import { BlogItem } from "@/components/blog-item";
 import { NewBlogBtn } from "@/components/new-blog-btn";
+import Loading from "@/components/loading";
 import type { Blog } from "@/types/blog";
-import { startTransition, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router";
 
 export default function Home() {
   const [blogs, setBlogs] = useState<Blog[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isPending, setIsPending] = useState(true);
 
   useEffect(() => {
+    let ignore = false;
+
     const fetchBlogs = async () => {
       try {
-        const res = await fetch("http://localhost:3000/api/blogs");
+        const res = await fetch(`${import.meta.env.VITE_BASE_URL}/blog`);
         const data = await res.json();
-        startTransition(() => {
-          setBlogs(data);
-        });
+
+        if (!ignore) {
+          setBlogs(data.data);
+          setIsPending(false);
+        }
       } catch (error) {
-        console.error("Failed to fetch blogs:", error);
-      } finally {
-        setIsLoading(false);
+        console.error(error);
+        setIsPending(false);
       }
     };
 
     fetchBlogs();
+    return () => {
+      ignore = true;
+    };
   }, []);
 
-  if (isLoading) {
-    return <div className="container mx-auto px-4 py-8">Loading...</div>;
+  if (isPending) {
+    return <Loading />;
   }
 
   return (
