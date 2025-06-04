@@ -8,41 +8,42 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { NavLink, useParams } from "react-router";
 import { useEffect, useState } from "react";
-import type { Blog } from "@/types/blog";
-import { toast } from "sonner";
+import type { Blog, BlogResponse } from "@/types/blog";
 import Loading from "@/components/loading";
 import NotFound from "@/components/not-found";
+import { toast } from "sonner";
 
 export default function Blog() {
   const { blogId } = useParams();
   const [blog, setBlog] = useState<Blog | null>(null);
-  const [isPending, setIsPending] = useState(false);
+  const [isPending, setIsPending] = useState(true);
 
   useEffect(() => {
     let ignore = false;
-
-    if (!blogId) {
-      return;
-    }
-
     const fetchBlog = async () => {
+      setIsPending(true);
       try {
-        setIsPending(true);
         const res = await fetch(
           `${import.meta.env.VITE_BASE_URL}/blog/${blogId}`
         );
-        const data = await res.json();
+        const { data, message, success, error } =
+          (await res.json()) as BlogResponse;
+
         if (!ignore) {
-          setBlog(data.data);
+          if (success) {
+            setBlog(data as Blog);
+          } else {
+            toast.error(message, {
+              description: error,
+            });
+          }
         }
       } catch (error: unknown) {
-        if (error instanceof Error) {
-          toast.error(error.message);
-        } else {
-          toast.error("An unknown error occurred");
-        }
+        console.log(error);
       } finally {
-        setIsPending(false);
+        if (!ignore) {
+          setIsPending(false);
+        }
       }
     };
 
@@ -51,7 +52,7 @@ export default function Blog() {
     return () => {
       ignore = true;
     };
-  }, []);
+  }, [blogId]);
 
   if (isPending) {
     return <Loading />;

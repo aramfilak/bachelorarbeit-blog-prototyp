@@ -25,3 +25,10 @@ export type NewBlog = {
   createdAt?: Date | undefined;
   updatedAt?: Date | undefined;
 };
+
+export type BlogResponse = {
+  success: boolean;
+  message: string;
+  data?: Blog | Blog[];
+  error?: string;
+};

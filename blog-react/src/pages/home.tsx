@@ -1,9 +1,10 @@
 import { BlogItem } from "@/components/blog-item";
 import { NewBlogBtn } from "@/components/new-blog-btn";
 import Loading from "@/components/loading";
-import type { Blog } from "@/types/blog";
+import type { Blog, BlogResponse } from "@/types/blog";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router";
+import { toast } from "sonner";
 
 export default function Home() {
   const [blogs, setBlogs] = useState<Blog[]>([]);
@@ -15,15 +16,24 @@ export default function Home() {
     const fetchBlogs = async () => {
       try {
         const res = await fetch(`${import.meta.env.VITE_BASE_URL}/blog`);
-        const data = await res.json();
+        const { data, message, success, error } =
+          (await res.json()) as BlogResponse;
 
         if (!ignore) {
-          setBlogs(data.data);
+          if (success) {
+            setBlogs(data as Blog[]);
+          } else {
+            toast.error(message, {
+              description: error,
+            });
+          }
+        }
+      } catch (error: unknown) {
+        console.log(error);
+      } finally {
+        if (!ignore) {
           setIsPending(false);
         }
-      } catch (error) {
-        console.error(error);
-        setIsPending(false);
       }
     };
 
