@@ -44,7 +44,9 @@ const validateBlog: RequestHandler = (
     res.status(400).json({
       success: false,
       message: "Ungültige Blog-Daten",
-      error: result.error.flatten().fieldErrors,
+      error: result.error.errors
+        .map((err, index) => `${index + 1}. ${err.message}`)
+        .join("\n"),
     });
     return;
   }

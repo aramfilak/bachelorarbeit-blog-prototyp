@@ -15,7 +15,7 @@ import { ArrowLeftIcon } from "lucide-react";
 import { type Resolver, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { NavLink, useNavigate } from "react-router";
-import type { Blog, BlogResponse } from "@/types/blog";
+import type { Blog } from "@/types/blog";
 
 export default function NewBlog() {
   const navigate = useNavigate();
@@ -35,26 +35,29 @@ export default function NewBlog() {
   });
 
   const createBlog = async (data: BlogFormValues) => {
-    const res = await fetch(`${import.meta.env.VITE_BASE_URL}/blog`, {
-      method: "POST",
-      body: JSON.stringify(data),
-    });
-    const {
-      message,
-      success,
-      error,
-      data: blogData,
-    } = (await res.json()) as BlogResponse;
-    if (success) {
-      const blog = blogData as Blog;
-      navigate(`/blog/${blog.id}`);
-      toast.success(message);
-    } else {
-      toast.error(message, {
-        description:
-          typeof error === "string" ? error : "Ein Fehler ist aufgetreten",
+    try {
+      const res = await fetch(`${import.meta.env.VITE_BASE_URL}/blog`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
       });
-      console.log(error);
+      const { success, message, error } = await res.json();
+
+      if (success) {
+        const blog = data as Blog;
+        navigate(`/blog/${blog.id}`);
+        toast.success(message || "Blog erfolgreich erstellt");
+      } else {
+        toast.error("Fehler beim Erstellen des Blogs", {
+          description: error,
+        });
+      }
+    } catch (error: unknown) {
+      toast.error("Fehler beim Erstellen des Blogs", {
+        description: String(error),
+      });
     }
   };
 
