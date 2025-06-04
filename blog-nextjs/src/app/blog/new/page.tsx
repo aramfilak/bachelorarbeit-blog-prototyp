@@ -1,7 +1,5 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Resolver, useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { AuthorTitleFields } from "@/components/blog-form/AuthorTitleFields";
@@ -17,6 +15,8 @@ import { createBlog } from "@/app/server/actions";
 import { toast } from "sonner";
 import Link from "next/link";
 import { ArrowLeftIcon } from "lucide-react";
+import { Resolver, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function NewBlog() {
   const router = useRouter();

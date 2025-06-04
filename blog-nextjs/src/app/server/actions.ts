@@ -3,11 +3,36 @@
 import { db } from "@/db";
 import { blogs } from "@/db/schema";
 import { revalidatePath } from "next/cache";
-import { type BlogFormValues } from "@/components/blog-form/schema";
+import {
+  type BlogFormValues,
+  blogFormSchema,
+} from "@/components/blog-form/schema";
 import { eq } from "drizzle-orm";
 
 const defaultImageUrl =
   "https://images.unsplash.com/photo-1599009434802-ca1dd09895e7?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+
+function validateBlogData(formData: BlogFormValues): {
+  success: boolean;
+  message?: string;
+  data?: BlogFormValues;
+} {
+  const validationResult = blogFormSchema.safeParse(formData);
+
+  if (!validationResult.success) {
+    return {
+      success: false,
+      message:
+        "Validierungsfehler: " +
+        validationResult.error.errors.map((err) => err.message).join(", "),
+    };
+  }
+
+  return {
+    success: true,
+    data: validationResult.data,
+  };
+}
 
 type CreateBlogResponse =
   | {
@@ -25,6 +50,14 @@ export async function createBlog(
   formData: BlogFormValues
 ): Promise<CreateBlogResponse> {
   try {
+    const validation = validateBlogData(formData);
+    if (!validation.success) {
+      return {
+        success: false,
+        message: validation.message!,
+      };
+    }
+
     if (!formData.imageUrl) {
       formData.imageUrl = defaultImageUrl;
     }
@@ -100,11 +133,19 @@ export async function updateBlog(
       };
     }
 
+    const validation = validateBlogData(formData);
+    if (!validation.success) {
+      return {
+        success: false,
+        message: validation.message!,
+      };
+    }
+
     await db
       .update(blogs)
       .set({
-        ...formData,
-        imageUrl: formData.imageUrl || defaultImageUrl,
+        ...validation.data!,
+        imageUrl: validation.data!.imageUrl || defaultImageUrl,
         updatedAt: new Date(),
       })
       .where(eq(blogs.id, id));
