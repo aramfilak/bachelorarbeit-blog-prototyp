@@ -1,9 +1,17 @@
-import { Button } from "@/components/ui/button";
+import { Routes, Route } from "react-router";
+import Home from "./pages/home.tsx";
+import Blog from "./pages/blog.tsx";
+import { ThemeProvider } from "./components/theme-provider.tsx";
+import { MainNav } from "./components/main-nav.tsx";
 
 export default function App() {
   return (
-    <div className="flex min-h-svh flex-col items-center justify-center">
-      <Button>Click me</Button>
-    </div>
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <MainNav />
+      <Routes>
+        <Route path="home" element={<Home />} />
+        <Route path="blog" element={<Blog />} />
+      </Routes>
+    </ThemeProvider>
   );
 }
