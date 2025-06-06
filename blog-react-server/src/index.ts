@@ -141,7 +141,10 @@ app.put(
     try {
       const [blog] = await db
         .update(blogs)
-        .set(req.body)
+        .set({
+          ...req.body,
+          updatedAt: new Date(),
+        })
         .where(eq(blogs.id, parseInt(req.params.id)))
         .returning();
 

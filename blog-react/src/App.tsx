@@ -6,6 +6,7 @@ import { Toaster } from "sonner";
 import NotFound from "./components/not-found.tsx";
 import Blog from "./pages/blog.tsx";
 import NewBlog from "./pages/new-blog.tsx";
+import BlogEdit from "./pages/blog-edit.tsx";
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
         <Route path="/blog">
           <Route path="new" element={<NewBlog />} />
           <Route path=":blogId" element={<Blog />} />
+          <Route path=":blogId/edit" element={<BlogEdit />} />
           <Route path="*" element={<NotFound />} />
         </Route>
         <Route path="*" element={<NotFound />} />
