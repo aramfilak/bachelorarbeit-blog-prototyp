@@ -15,7 +15,6 @@ export default function App() {
       <Toaster richColors position="top-center" />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/blog/:blogId" element={<Blog />} />
         {/* Blog routes */}
         <Route path="/blog">
           <Route path="new" element={<NewBlog />} />
