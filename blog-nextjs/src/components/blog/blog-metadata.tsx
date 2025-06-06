@@ -22,7 +22,12 @@ export function BlogMetadata({
       </div>
       <div className="flex items-center gap-2 text-muted-foreground">
         <ClockIcon className="size-5" />
-        <span>{formatReadingTime(readingTime, readingTimeUnit)}</span>
+        <span>
+          {formatReadingTime(
+            readingTime,
+            readingTimeUnit as "minutes" | "hours"
+          )}
+        </span>
       </div>
       <div className="flex items-center gap-2 text-muted-foreground">
         <CalendarIcon className="size-5" />

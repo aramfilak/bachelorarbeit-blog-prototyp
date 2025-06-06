@@ -41,7 +41,10 @@ export function BlogItem({ blog }: { blog: Blog }) {
           <div className="flex items-center gap-2">
             <ClockIcon className="size-4" />
             <span>
-              {formatReadingTime(blog.readingTime, blog.readingTimeUnit)}
+              {formatReadingTime(
+                blog.readingTime,
+                blog.readingTimeUnit as "minutes" | "hours"
+              )}
             </span>
           </div>
         </div>

@@ -5,8 +5,8 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const formatReadingTime = (time: number, unit: string) => {
-  return `${time} ${unit}`;
+export const formatReadingTime = (time: number, unit: "minutes" | "hours") => {
+  return `${time} ${unit === "minutes" ? "Minuten" : "Stunden"}`;
 };
 
 export const formatGermanDate = (date: Date | undefined) => {
