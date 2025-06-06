@@ -47,7 +47,7 @@ export function MediaFields() {
         name="tags"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Schlagworte</FormLabel>
+            <FormLabel>Schlagwörter</FormLabel>
             <FormControl>
               <TagInput
                 maxTags={5}
