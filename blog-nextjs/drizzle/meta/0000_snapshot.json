@@ -1,5 +1,5 @@
 {
-  "id": "032b7ba1-c528-40d3-a461-2f8ef8978d7f",
+  "id": "319dba42-26b9-4d6f-8f3f-d39ed24f500b",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -43,13 +43,14 @@
           "type": "varchar(512)",
           "primaryKey": false,
           "notNull": true,
-          "default": "'https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'"
+          "default": "''"
         },
         "tags": {
           "name": "tags",
-          "type": "text",
+          "type": "text[]",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "ARRAY[]::text[]"
         },
         "readingTime": {
           "name": "readingTime",
@@ -62,13 +63,6 @@
           "type": "varchar(50)",
           "primaryKey": false,
           "notNull": true
-        },
-        "published": {
-          "name": "published",
-          "type": "boolean",
-          "primaryKey": false,
-          "notNull": true,
-          "default": false
         },
         "createdAt": {
           "name": "createdAt",

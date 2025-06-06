@@ -1,1 +1,0 @@
-ALTER TABLE "Blog" ALTER COLUMN "imageUrl" SET DEFAULT '';
