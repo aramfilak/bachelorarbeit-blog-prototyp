@@ -215,7 +215,9 @@ export async function createRandomBlog() {
       readingTime: Math.floor(Math.random() * 10) + 5,
       readingTimeUnit: "minutes" as const,
       tags: getRandomTags(),
-      imageUrl: `https://picsum.photos/1000/500?random=${Math.random()}`,
+      imageUrl: `https://picsum.photos/id/${Math.trunc(
+        Math.random() * 100
+      )}/1000/500`,
     };
   };
 
