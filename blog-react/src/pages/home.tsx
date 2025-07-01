@@ -27,7 +27,7 @@ export default function Home() {
       }
     } catch (error: unknown) {
       console.log(error);
-      toast.error("Failed to fetch blogs");
+      toast.error("Beiträge konnten nicht geladen werden");
     } finally {
       setIsPending(false);
     }
